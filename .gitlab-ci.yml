@@ -1,0 +1,19 @@
+image: docker:stable
+
+variables:
+  IMAGE_REPO: $REGISTRY_URL
+  IMAGE_NAME: devops/pylint
+  IMAGE_VERSION: 3.6
+  CONTAINER_IMAGE: $IMAGE_REPO/$IMAGE_NAME
+
+build:
+  stage: build
+  only:
+    - master
+  before_script:
+    - docker login -u $REGISTRY_LOGIN -p $REGISTRY_PASSWORD $REGISTRY_URL
+  script:
+    - docker pull $CONTAINER_IMAGE:latest || true
+    - docker build --cache-from $CONTAINER_IMAGE:latest --tag $CONTAINER_IMAGE:$IMAGE_VERSION --tag $CONTAINER_IMAGE:latest .
+    - docker push $CONTAINER_IMAGE:$IMAGE_VERSION
+    - docker push $CONTAINER_IMAGE:latest
