@@ -1,10 +1,9 @@
 image: docker:stable
 
 variables:
-  IMAGE_REPO: $REGISTRY_URL
-  IMAGE_NAME: devops/pylint
-  IMAGE_VERSION: 3.6
-  CONTAINER_IMAGE: $IMAGE_REPO/$IMAGE_NAME
+  IMAGE_NAME: "devops/pylint"
+  IMAGE_VERSION: "3.6"
+  CONTAINER_IMAGE: "$REGISTRY_URL/$IMAGE_NAME"
 
 build:
   stage: build
