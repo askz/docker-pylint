@@ -9,6 +9,8 @@ build:
   stage: build
   only:
     - master
+  tags:
+    - docker
   before_script:
     - docker login -u $REGISTRY_LOGIN -p $REGISTRY_PASSWORD $REGISTRY_URL
   script:
